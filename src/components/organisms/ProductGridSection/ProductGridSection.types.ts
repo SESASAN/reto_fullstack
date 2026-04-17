@@ -7,4 +7,7 @@ export type ProductGridSectionProps = {
   totalPages?: number
   products?: Product[]
   onAddToCart?: (productId: number) => void
+  isLoading?: boolean
+  error?: string | null
+  onRetry?: () => void
 }
