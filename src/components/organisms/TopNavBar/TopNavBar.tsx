@@ -1,6 +1,6 @@
 import { NavLink } from 'react-router-dom'
 
-import { Container } from '@/components/atoms'
+import { Container, IconButton } from '@/components/atoms'
 
 import { BRAND_NAME, NAV_LINKS } from './TopNavBar.constants'
 import type { TopNavBarLink } from './TopNavBar.types'
@@ -38,6 +38,30 @@ export function TopNavBar() {
         <nav className="hidden items-center gap-8 md:flex">
           {NAV_LINKS.map(renderLink)}
         </nav>
+
+        <div className="flex items-center gap-3">
+          <NavLink to="/cart">
+            <IconButton
+              ariaLabel="Ir al carrito"
+              icon={
+                <span className="material-symbols-outlined text-[20px]">
+                  shopping_cart
+                </span>
+              }
+            />
+          </NavLink>
+
+          <NavLink to="/login">
+            <IconButton
+              ariaLabel="Ir a ingresar"
+              icon={
+                <span className="material-symbols-outlined text-[20px]">
+                  account_circle
+                </span>
+              }
+            />
+          </NavLink>
+        </div>
       </Container>
     </header>
   )
