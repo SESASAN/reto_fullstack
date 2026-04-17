@@ -1,22 +1,22 @@
-# OBSIDIAN — Fullstack Challenge (Entrega 2 · React)
+# OBSIDIAN — E-commerce SPA
 
-E-commerce SPA estilo **OBSIDIAN** (dark premium) para el diplomado Fullstack (UPB).
+E-commerce SPA estilo **OBSIDIAN** (dark premium).
 
-## Objetivo (según la guía)
-- SPA con navegación (React Router)
-- Galería de productos desde API (**FakeStore API**)
+## Características
+- Navegación SPA (React Router)
+- Catálogo desde API (**FakeStore API**)
 - Buscador en tiempo real
 - Paginación (6–8 por página)
 - Carrito funcional + previsualización de checkout
-- **Bonus**: Firebase Auth + Firestore
+- Autenticación y órdenes: Firebase Auth + Firestore
 
-## Stack
+## Tecnologías
 - Runtime / package manager: **Bun**
 - Frontend: **Vite + React + TypeScript**
 - UI: **Tailwind CSS** (tema OBSIDIAN)
 - Estado global: **Zustand** (con persistencia a localStorage)
 - HTTP client: **Axios**
-- Backend-as-a-service: **Firebase Auth + Firestore**
+- Backend como servicio (BaaS): **Firebase Auth + Firestore**
 - API de productos: https://fakestoreapi.com/
 
 ## Arquitectura de carpetas
@@ -36,9 +36,9 @@ No se usan **Firebase Functions**.
 
 ## Seguridad (Firebase)
 Como el cliente habla directo con Firestore, la seguridad depende 100% de **Security Rules**.
-Regla de oro: **deny by default**. Nunca usar `allow read, write: if true`.
+Regla de oro: **negar por defecto**. Nunca usar `allow read, write: if true`.
 
-## Requisitos de instalación
+## Requisitos
 1) Instalar Bun (una vez)
    - Windows (PowerShell): `powershell -c "irm bun.sh/install.ps1|iex"`
 
@@ -47,7 +47,7 @@ Regla de oro: **deny by default**. Nunca usar `allow read, write: if true`.
 bun install
 ```
 
-## Scripts
+## Ejecutar en desarrollo
 ```bash
 bun dev
 ```
