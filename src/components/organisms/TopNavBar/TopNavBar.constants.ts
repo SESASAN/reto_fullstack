@@ -5,3 +5,5 @@ export const NAV_LINKS = [
   { to: '/cart', label: 'Carrito' },
   { to: '/login', label: 'Ingresar' },
 ] as const
+
+export const CART_BADGE_COUNT = 0

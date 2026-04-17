@@ -2,7 +2,7 @@ import { NavLink } from 'react-router-dom'
 
 import { Container, IconButton } from '@/components/atoms'
 
-import { BRAND_NAME, NAV_LINKS } from './TopNavBar.constants'
+import { BRAND_NAME, CART_BADGE_COUNT, NAV_LINKS } from './TopNavBar.constants'
 import type { TopNavBarLink } from './TopNavBar.types'
 
 const navLinkClass = ({ isActive }: { isActive: boolean }) =>
@@ -41,14 +41,21 @@ export function TopNavBar() {
 
         <div className="flex items-center gap-3">
           <NavLink to="/cart">
-            <IconButton
-              ariaLabel="Ir al carrito"
-              icon={
-                <span className="material-symbols-outlined text-[20px]">
-                  shopping_cart
+            <div className="relative">
+              <IconButton
+                ariaLabel="Ir al carrito"
+                icon={
+                  <span className="material-symbols-outlined text-[20px]">
+                    shopping_cart
+                  </span>
+                }
+              />
+              {CART_BADGE_COUNT > 0 ? (
+                <span className="absolute -right-1 -top-1 flex h-4 w-4 items-center justify-center rounded-full bg-primary text-[10px] font-black text-on-primary">
+                  {CART_BADGE_COUNT}
                 </span>
-              }
-            />
+              ) : null}
+            </div>
           </NavLink>
 
           <NavLink to="/login">
