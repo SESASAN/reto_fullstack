@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom'
 
 import { Badge, Button } from '@/components/atoms'
+import { buildProductSlug } from '@/services/slugify'
 import { formatPrice } from '@/styles/formatPrice'
 import type { Product } from '@/types'
 
@@ -13,6 +14,8 @@ import type { ProductCardProps } from './ProductCard.types'
 const categoryLabel = (product: Product) => product.category?.toUpperCase() ?? ''
 
 export function ProductCard({ product, onAddToCart }: ProductCardProps) {
+  const productSlug = buildProductSlug(product.id, product.title)
+
   return (
     <div className="group relative rounded-2xl border border-outline-variant/10 bg-surface-container p-5 transition-all duration-300 hover:-translate-y-2 hover:border-primary/20 hover:shadow-[0_20px_40px_rgba(0,0,0,0.35)]">
       {product.rating?.count && product.rating.count > 200 ? (
@@ -21,7 +24,7 @@ export function ProductCard({ product, onAddToCart }: ProductCardProps) {
         </div>
       ) : null}
 
-      <Link to={`/products/${product.id}`} className="block">
+      <Link to={`/products/${productSlug}`} className="block">
         <div className="aspect-square overflow-hidden rounded-xl bg-surface-container-low flex items-center justify-center">
           <img
             src={product.image}

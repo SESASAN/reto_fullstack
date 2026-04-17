@@ -1,3 +1,3 @@
 export type ProductRouteParams = {
-  id: string
+  slug: string
 }

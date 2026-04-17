@@ -17,7 +17,7 @@ export const router = createBrowserRouter([
     errorElement: <NotFoundPage />, // fallback for routing errors
     children: [
       { path: '/', element: <HomePage /> },
-      { path: '/products/:id', element: <ProductDetailPage /> },
+      { path: '/products/:slug', element: <ProductDetailPage /> },
       { path: '/cart', element: <CartPage /> },
       { path: '/checkout', element: <CheckoutPage /> },
       { path: '/login', element: <LoginPage /> },

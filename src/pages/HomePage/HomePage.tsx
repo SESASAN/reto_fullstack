@@ -6,7 +6,7 @@ export function HomePage() {
   return (
     <div>
       <HeroSection />
-      <ProductGridSection />
+      <ProductGridSection products={[]} />
       <NewsletterCallout />
     </div>
   )

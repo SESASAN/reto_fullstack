@@ -1,9 +1,9 @@
 export type FooterLink = {
-  label: string
-  href: string
+  readonly label: string
+  readonly href: string
 }
 
 export type FooterColumn = {
-  title: string
-  links: FooterLink[]
+  readonly title: string
+  readonly links: readonly FooterLink[]
 }
