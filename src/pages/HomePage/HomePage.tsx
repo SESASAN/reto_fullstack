@@ -2,6 +2,7 @@ import { HOME_TITLE } from './HomePage.constants'
 import type { HomeFeatureCard } from './HomePage.types'
 
 import { NewsletterCallout } from '@/components/organisms/NewsletterCallout'
+import { HeroSection } from '@/components/organisms/HeroSection'
 
 export function HomePage() {
   const cards: HomeFeatureCard[] = [
@@ -17,6 +18,8 @@ export function HomePage() {
 
   return (
     <div>
+      <HeroSection />
+
       <div className="mx-auto max-w-[1440px] px-6 py-16 md:px-8">
         <h1 className="font-headline text-4xl font-extrabold tracking-tight md:text-6xl">
           {HOME_TITLE}
