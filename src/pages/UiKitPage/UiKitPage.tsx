@@ -1,4 +1,5 @@
 import { Badge, Button, Container, IconButton, Input } from '@/components/atoms'
+import { SearchBar } from '@/components/molecules/SearchBar'
 
 import { UI_KIT_TITLE } from './UiKitPage.constants'
 
@@ -50,6 +51,13 @@ export function UiKitPage() {
               </p>
               <Input placeholder="Correo" error="El correo es obligatorio" />
             </div>
+          </div>
+
+          <div className="mt-6">
+            <p className="mb-2 text-xs font-semibold tracking-wide text-on-surface-variant">
+              SearchBar
+            </p>
+            <SearchBar />
           </div>
         </section>
 

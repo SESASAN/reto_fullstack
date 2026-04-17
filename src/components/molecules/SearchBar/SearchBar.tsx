@@ -7,6 +7,7 @@ export function SearchBar({
   value,
   onChange,
   placeholder = SEARCH_PLACEHOLDER,
+  ariaLabel,
 }: SearchBarProps) {
   return (
     <div className="relative w-full">
@@ -18,7 +19,7 @@ export function SearchBar({
         onChange={(e) => onChange?.(e.target.value)}
         placeholder={placeholder}
         className="pl-10"
-        aria-label={placeholder}
+        aria-label={ariaLabel ?? placeholder}
       />
     </div>
   )

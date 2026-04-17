@@ -2,6 +2,7 @@ import { create } from 'zustand'
 import { persist } from 'zustand/middleware'
 
 import type { CartItem, Product } from '@/types'
+import { STORAGE_KEYS } from '@/store/persist'
 
 export type CartState = {
   items: CartItem[]
@@ -96,7 +97,7 @@ export const useCartStore = create<CartState>()(
         get().items.reduce((acc, i) => acc + i.product.price * i.quantity, 0),
     }),
     {
-      name: 'obsidian_cart',
+      name: STORAGE_KEYS.cart,
       version: 1,
     },
   ),

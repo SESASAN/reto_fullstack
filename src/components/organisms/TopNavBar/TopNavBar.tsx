@@ -2,8 +2,9 @@ import { NavLink } from 'react-router-dom'
 
 import { Container, IconButton } from '@/components/atoms'
 import { SearchBar } from '@/components/molecules/SearchBar'
+import { useCartStore } from '@/store/cart.store'
 
-import { BRAND_NAME, CART_BADGE_COUNT, NAV_LINKS } from './TopNavBar.constants'
+import { BRAND_NAME, NAV_LINKS } from './TopNavBar.constants'
 import type { TopNavBarLink } from './TopNavBar.types'
 
 const navLinkClass = ({ isActive }: { isActive: boolean }) =>
@@ -26,6 +27,8 @@ const renderLink = (link: TopNavBarLink) => (
 )
 
 export function TopNavBar() {
+  const totalItems = useCartStore((s) => s.totalItems())
+
   return (
     <header className="fixed inset-x-0 top-0 z-50 border-b border-outline-variant/10 bg-background/80 backdrop-blur-xl shadow-obsidian-nav">
       <Container className="flex items-center justify-between py-4">
@@ -41,7 +44,7 @@ export function TopNavBar() {
         </div>
 
         <nav className="hidden items-center gap-8 md:flex">
-          {NAV_LINKS.map(renderLink)}
+              {NAV_LINKS.map(renderLink)}
         </nav>
 
         <div className="flex items-center gap-3">
@@ -55,9 +58,9 @@ export function TopNavBar() {
                   </span>
                 }
               />
-              {CART_BADGE_COUNT > 0 ? (
+              {totalItems > 0 ? (
                 <span className="absolute -right-1 -top-1 flex h-4 w-4 items-center justify-center rounded-full bg-primary text-[10px] font-black text-on-primary">
-                  {CART_BADGE_COUNT}
+                  {totalItems}
                 </span>
               ) : null}
             </div>
