@@ -8,6 +8,7 @@ import {
   GRID_EMPTY_SEARCH_TITLE,
 } from '@/components/organisms/ProductGrid/ProductGrid.constants'
 import { filterProducts } from '@/services/filterProducts'
+import { useCartStore } from '@/store/cart.store'
 import { useProductsStore } from '@/store/products.store'
 import { useUiStore } from '@/store/ui.store'
 
@@ -24,6 +25,7 @@ export function HomePage() {
   const setViewMode = useUiStore((s) => s.setViewMode)
   const setSelectedCategory = useUiStore((s) => s.setSelectedCategory)
   const setCurrentPage = useUiStore((s) => s.setCurrentPage)
+  const addItem = useCartStore((s) => s.addItem)
 
   const filteredProducts = filterProducts(products, searchQuery, selectedCategory)
   const totalPages = Math.max(1, Math.ceil(filteredProducts.length / itemsPerPage))
@@ -54,6 +56,10 @@ export function HomePage() {
         selectedCategory={selectedCategory}
         onCategoryChange={setSelectedCategory}
         onPageChange={setCurrentPage}
+        onAddToCart={(productId) => {
+          const product = products.find((p) => p.id === productId)
+          if (product) addItem(product)
+        }}
         isLoading={isLoading}
         error={error}
         onRetry={() => void fetchProducts()}
