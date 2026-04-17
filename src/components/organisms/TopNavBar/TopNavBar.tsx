@@ -1,6 +1,7 @@
 import { NavLink } from 'react-router-dom'
 
 import { Container, IconButton } from '@/components/atoms'
+import { SearchBar } from '@/components/molecules/SearchBar'
 
 import { BRAND_NAME, CART_BADGE_COUNT, NAV_LINKS } from './TopNavBar.constants'
 import type { TopNavBarLink } from './TopNavBar.types'
@@ -34,6 +35,10 @@ export function TopNavBar() {
         >
           {BRAND_NAME}
         </NavLink>
+
+        <div className="mx-10 hidden w-full max-w-md md:block">
+          <SearchBar />
+        </div>
 
         <nav className="hidden items-center gap-8 md:flex">
           {NAV_LINKS.map(renderLink)}
