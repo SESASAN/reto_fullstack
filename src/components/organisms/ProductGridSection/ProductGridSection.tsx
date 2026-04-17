@@ -1,5 +1,6 @@
 import { Container } from '@/components/atoms'
 import { InventoryHeader } from '@/components/molecules/InventoryHeader'
+import { Pagination } from '@/components/molecules/Pagination'
 
 import {
   EMPTY_GRID_DESCRIPTION,
@@ -7,7 +8,12 @@ import {
 } from './ProductGridSection.constants'
 import type { ProductGridSectionProps } from './ProductGridSection.types'
 
-export function ProductGridSection({ title, subtitle }: ProductGridSectionProps) {
+export function ProductGridSection({
+  title,
+  subtitle,
+  currentPage = 1,
+  totalPages = 3,
+}: ProductGridSectionProps) {
   return (
     <section className="py-20">
       <Container>
@@ -21,6 +27,8 @@ export function ProductGridSection({ title, subtitle }: ProductGridSectionProps)
             {EMPTY_GRID_DESCRIPTION}
           </p>
         </div>
+
+        <Pagination currentPage={currentPage} totalPages={totalPages} />
       </Container>
     </section>
   )
