@@ -1,7 +1,7 @@
 import { useEffect } from 'react'
-import { useParams } from 'react-router-dom'
+import { Link, useParams } from 'react-router-dom'
 
-import { Button } from '@/components/atoms'
+import { Button, IconButton } from '@/components/atoms'
 import { parseProductIdFromSlug } from '@/services/slugify'
 import { formatPrice } from '@/styles/formatPrice'
 import { useCartStore } from '@/store/cart.store'
@@ -36,7 +36,15 @@ export function ProductDetailPage() {
 
   return (
     <div className="mx-auto max-w-[1440px] px-6 py-16 md:px-8">
-      <h1 className="font-headline text-3xl font-extrabold tracking-tight">
+      <Link
+        to="/"
+        className="inline-flex items-center gap-2 text-sm text-on-surface-variant transition-colors hover:text-primary"
+      >
+        <span className="material-symbols-outlined text-[20px]">arrow_back</span>
+        Volver al catálogo
+      </Link>
+
+      <h1 className="mt-6 font-headline text-3xl font-extrabold tracking-tight">
         {PRODUCT_DETAIL_TITLE}
       </h1>
 
@@ -88,7 +96,23 @@ export function ProductDetailPage() {
           </div>
         </div>
       ) : (
-        <p className="mt-2 text-on-surface-variant">No se encontró el producto.</p>
+        <div className="mt-8 flex flex-col items-center justify-center rounded-3xl border border-outline-variant/10 bg-surface-container-low p-16 text-center shadow-2xl">
+          <span className="material-symbols-outlined text-[64px] text-on-surface-variant/40">
+            search_off
+          </span>
+          <h2 className="mt-4 font-headline text-xl font-bold text-on-surface">
+            Producto no encontrado
+          </h2>
+          <p className="mt-2 text-on-surface-variant">
+            Este producto no existe o fue eliminado.
+          </p>
+          <Link
+            to="/"
+            className="mt-6 text-primary hover:underline"
+          >
+            Volver al catálogo
+          </Link>
+        </div>
       )}
     </div>
   )
