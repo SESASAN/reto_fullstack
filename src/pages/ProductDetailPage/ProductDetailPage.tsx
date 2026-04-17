@@ -1,8 +1,10 @@
 import { useEffect } from 'react'
 import { useParams } from 'react-router-dom'
 
+import { Button } from '@/components/atoms'
 import { parseProductIdFromSlug } from '@/services/slugify'
 import { formatPrice } from '@/styles/formatPrice'
+import { useCartStore } from '@/store/cart.store'
 import { useProductsStore } from '@/store/products.store'
 
 import { PRODUCT_DETAIL_TITLE } from './ProductDetailPage.constants'
@@ -16,6 +18,7 @@ export function ProductDetailPage() {
   const error = useProductsStore((s) => s.error)
   const fetchProductById = useProductsStore((s) => s.fetchProductById)
   const clearSelectedProduct = useProductsStore((s) => s.clearSelectedProduct)
+  const addItem = useCartStore((s) => s.addItem)
 
   useEffect(() => {
     if (!productId) return
@@ -26,6 +29,10 @@ export function ProductDetailPage() {
       clearSelectedProduct()
     }
   }, [clearSelectedProduct, fetchProductById, productId])
+
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: 'smooth' })
+  }, [])
 
   return (
     <div className="mx-auto max-w-[1440px] px-6 py-16 md:px-8">
@@ -56,12 +63,28 @@ export function ProductDetailPage() {
             <h2 className="mt-2 font-headline text-3xl font-black tracking-tight text-on-surface">
               {product.title}
             </h2>
+
+            {product.rating?.rate && (
+              <p className="mt-2 text-sm text-on-surface-variant">
+                ★ {product.rating.rate} ({product.rating.count} reseñas)
+              </p>
+            )}
+
             <p className="mt-4 text-2xl font-black text-on-surface">
               {formatPrice(product.price, 'USD')}
             </p>
             <p className="mt-6 max-w-2xl text-on-surface-variant">
               {product.description}
             </p>
+
+            <div className="mt-8">
+              <Button
+                size="lg"
+                onClick={() => addItem(product)}
+              >
+                Agregar al carrito
+              </Button>
+            </div>
           </div>
         </div>
       ) : (
