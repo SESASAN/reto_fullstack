@@ -1,7 +1,7 @@
-export const NEWSLETTER_TITLE = 'Únete al circuito'
+export const NEWSLETTER_TITLE = 'Suscríbete a nuestras novedades'
 
 export const NEWSLETTER_DESCRIPTION =
-  'Accede a lanzamientos, análisis técnicos y ediciones exclusivas.'
+  'Recibe novedades, promociones y productos destacados directamente en tu correo.'
 
 export const NEWSLETTER_PLACEHOLDER = 'Correo electrónico'
 export const NEWSLETTER_BUTTON_LABEL = 'Suscribirse'

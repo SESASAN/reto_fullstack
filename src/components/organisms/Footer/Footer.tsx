@@ -30,7 +30,7 @@ export function Footer() {
               OBSIDIAN
             </div>
             <p className="text-sm text-on-surface/50">
-              Hardware y periféricos seleccionados para rendimiento y estética.
+              Tienda online con una selección cuidada de productos para diferentes estilos y necesidades.
             </p>
           </div>
 

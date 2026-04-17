@@ -1,19 +1,19 @@
 export const FOOTER_COLUMNS = [
   {
-    title: 'Ecosistema',
+    title: 'Categorías',
     links: [
-      { label: 'Hardware', href: '#' },
-      { label: 'Software', href: '#' },
-      { label: 'Firmware', href: '#' },
-      { label: 'Archivo', href: '#' },
+      { label: 'Electrónica', href: '#' },
+      { label: 'Joyería', href: '#' },
+      { label: 'Ropa de hombre', href: '#' },
+      { label: 'Ropa de mujer', href: '#' },
     ],
   },
   {
-    title: 'Soporte',
+    title: 'Atención',
     links: [
-      { label: 'Soporte técnico', href: '#' },
+      { label: 'Centro de ayuda', href: '#' },
       { label: 'Garantía', href: '#' },
-      { label: 'Documentación', href: '#' },
+      { label: 'Cambios y devoluciones', href: '#' },
       { label: 'Envíos', href: '#' },
     ],
   },
@@ -22,7 +22,7 @@ export const FOOTER_COLUMNS = [
     links: [
       { label: 'Privacidad', href: '#' },
       { label: 'Términos', href: '#' },
-      { label: 'Seguridad', href: '#' },
+      { label: 'Cookies', href: '#' },
     ],
   },
 ] as const
