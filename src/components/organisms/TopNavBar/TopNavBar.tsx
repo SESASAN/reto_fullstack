@@ -3,6 +3,7 @@ import { NavLink } from 'react-router-dom'
 import { Container, IconButton } from '@/components/atoms'
 import { SearchBar } from '@/components/molecules/SearchBar'
 import { useCartStore } from '@/store/cart.store'
+import { useUiStore } from '@/store/ui.store'
 
 import { BRAND_NAME, NAV_LINKS } from './TopNavBar.constants'
 import type { TopNavBarLink } from './TopNavBar.types'
@@ -28,6 +29,8 @@ const renderLink = (link: TopNavBarLink) => (
 
 export function TopNavBar() {
   const totalItems = useCartStore((s) => s.totalItems())
+  const searchQuery = useUiStore((s) => s.searchQuery)
+  const setSearchQuery = useUiStore((s) => s.setSearchQuery)
 
   return (
     <header className="fixed inset-x-0 top-0 z-50 border-b border-outline-variant/10 bg-background/80 backdrop-blur-xl shadow-obsidian-nav">
@@ -40,7 +43,7 @@ export function TopNavBar() {
         </NavLink>
 
         <div className="mx-10 hidden w-full max-w-md md:block">
-          <SearchBar />
+          <SearchBar value={searchQuery} onChange={setSearchQuery} />
         </div>
 
         <nav className="hidden items-center gap-8 md:flex">
