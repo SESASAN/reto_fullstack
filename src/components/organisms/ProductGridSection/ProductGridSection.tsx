@@ -16,6 +16,7 @@ export function ProductGridSection({
   isLoading = false,
   error = null,
   onRetry,
+  onPageChange,
 }: ProductGridSectionProps) {
   return (
     <section className="py-20">
@@ -41,7 +42,11 @@ export function ProductGridSection({
           <ProductGrid products={products} onAddToCart={onAddToCart} />
         )}
 
-        <Pagination currentPage={currentPage} totalPages={totalPages} />
+        <Pagination
+          currentPage={currentPage}
+          totalPages={totalPages}
+          onPageChange={onPageChange}
+        />
       </Container>
     </section>
   )

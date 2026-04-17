@@ -10,4 +10,5 @@ export type ProductGridSectionProps = {
   isLoading?: boolean
   error?: string | null
   onRetry?: () => void
+  onPageChange?: (page: number) => void
 }
