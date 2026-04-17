@@ -8,6 +8,8 @@ export function Pagination({
   totalPages,
   onPageChange,
 }: PaginationProps) {
+  if (totalPages <= 1) return null
+
   const canPrev = currentPage > 1
   const canNext = currentPage < totalPages
 
@@ -23,9 +25,28 @@ export function Pagination({
           Anterior
         </Button>
 
-        <span className="px-3 text-sm text-on-surface/70">
-          {currentPage} / {totalPages}
-        </span>
+        <div className="flex items-center gap-2">
+          {Array.from({ length: totalPages }, (_, index) => index + 1).map((page) => {
+            const isActive = page === currentPage
+
+            return (
+              <button
+                key={page}
+                type="button"
+                onClick={() => onPageChange?.(page)}
+                className={[
+                  'min-w-9 rounded-lg px-3 py-2 text-sm font-semibold transition-colors',
+                  isActive
+                    ? 'bg-surface-container-high text-on-surface shadow-sm'
+                    : 'text-on-surface/60 hover:text-primary',
+                ].join(' ')}
+                aria-current={isActive ? 'page' : undefined}
+              >
+                {page}
+              </button>
+            )
+          })}
+        </div>
 
         <Button
           variant="ghost"

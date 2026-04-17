@@ -1,13 +1,19 @@
 import { create } from 'zustand'
 
+export type ViewMode = 'grid' | 'list'
+
 export type UiState = {
   searchQuery: string
   currentPage: number
   itemsPerPage: number
+  viewMode: ViewMode
+  selectedCategory: string | null
 
   setSearchQuery: (query: string) => void
   setCurrentPage: (page: number) => void
   setItemsPerPage: (items: number) => void
+  setViewMode: (mode: ViewMode) => void
+  setSelectedCategory: (category: string | null) => void
   resetPage: () => void
 }
 
@@ -18,6 +24,8 @@ export const useUiStore = create<UiState>((set) => ({
   searchQuery: '',
   currentPage: 1,
   itemsPerPage: 8,
+  viewMode: 'grid',
+  selectedCategory: null,
 
   setSearchQuery: (query) =>
     set(() => ({
@@ -35,6 +43,14 @@ export const useUiStore = create<UiState>((set) => ({
     set((state) => ({
       ...state,
       itemsPerPage: clampInt(items, 1, 48),
+      currentPage: 1,
+    })),
+
+  setViewMode: (mode) => set(() => ({ viewMode: mode })),
+
+  setSelectedCategory: (category) =>
+    set(() => ({
+      selectedCategory: category,
       currentPage: 1,
     })),
 

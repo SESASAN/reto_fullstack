@@ -1,2 +1,2 @@
-export const INVENTORY_TITLE = 'Inventario curado'
-export const INVENTORY_SUBTITLE = 'Categorías: electronics, jewelery, men\'s clothing, women\'s clothing'
+export const INVENTORY_TITLE = 'Todos nuestros productos'
+export const INVENTORY_SUBTITLE = ''

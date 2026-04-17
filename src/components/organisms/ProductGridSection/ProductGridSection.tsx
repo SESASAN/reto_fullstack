@@ -1,4 +1,5 @@
 import { Container } from '@/components/atoms'
+import { CategoryFilter } from '@/components/molecules/CategoryFilter'
 import { InventoryHeader } from '@/components/molecules/InventoryHeader'
 import { Pagination } from '@/components/molecules/Pagination'
 import { ProductGrid } from '@/components/organisms/ProductGrid'
@@ -12,16 +13,35 @@ export function ProductGridSection({
   currentPage = 1,
   totalPages = 3,
   products = [],
+  viewMode,
+  onViewModeChange,
+  selectedCategory,
+  onCategoryChange,
+  showCategoryFilter = true,
   onAddToCart,
   isLoading = false,
   error = null,
   onRetry,
   onPageChange,
+  emptyTitle,
+  emptyDescription,
 }: ProductGridSectionProps) {
   return (
     <section className="py-20">
       <Container>
-        <InventoryHeader title={title} subtitle={subtitle} />
+        <InventoryHeader
+          title={title}
+          subtitle={subtitle}
+          viewMode={viewMode}
+          onViewModeChange={onViewModeChange}
+        />
+
+        {showCategoryFilter && onCategoryChange ? (
+          <CategoryFilter
+            selectedCategory={selectedCategory ?? null}
+            onCategoryChange={onCategoryChange}
+          />
+        ) : null}
 
         {isLoading ? (
           <div className="mt-10 rounded-3xl border border-outline-variant/10 bg-surface-container-low p-10 text-center shadow-2xl">
@@ -39,7 +59,13 @@ export function ProductGridSection({
             ) : null}
           </div>
         ) : (
-          <ProductGrid products={products} onAddToCart={onAddToCart} />
+          <ProductGrid
+            products={products}
+            viewMode={viewMode}
+            onAddToCart={onAddToCart}
+            emptyTitle={emptyTitle}
+            emptyDescription={emptyDescription}
+          />
         )}
 
         <Pagination

@@ -19,9 +19,13 @@ export function HomePage() {
   const searchQuery = useUiStore((s) => s.searchQuery)
   const currentPage = useUiStore((s) => s.currentPage)
   const itemsPerPage = useUiStore((s) => s.itemsPerPage)
+  const viewMode = useUiStore((s) => s.viewMode)
+  const selectedCategory = useUiStore((s) => s.selectedCategory)
+  const setViewMode = useUiStore((s) => s.setViewMode)
+  const setSelectedCategory = useUiStore((s) => s.setSelectedCategory)
   const setCurrentPage = useUiStore((s) => s.setCurrentPage)
 
-  const filteredProducts = filterProducts(products, searchQuery)
+  const filteredProducts = filterProducts(products, searchQuery, selectedCategory)
   const totalPages = Math.max(1, Math.ceil(filteredProducts.length / itemsPerPage))
   const safeCurrentPage = Math.min(currentPage, totalPages)
   const start = (safeCurrentPage - 1) * itemsPerPage
@@ -45,6 +49,10 @@ export function HomePage() {
         products={paginatedProducts}
         currentPage={safeCurrentPage}
         totalPages={totalPages}
+        viewMode={viewMode}
+        onViewModeChange={setViewMode}
+        selectedCategory={selectedCategory}
+        onCategoryChange={setSelectedCategory}
         onPageChange={setCurrentPage}
         isLoading={isLoading}
         error={error}
