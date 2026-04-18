@@ -8,12 +8,12 @@ import { CART_TITLE } from './CartPage.constants'
 
 export function CartPage() {
   const items = useCartStore((s) => s.items)
-  const subtotal = useCartStore((s) => s.subtotal)
-  const totalItems = useCartStore((s) => s.totalItems)
   const increment = useCartStore((s) => s.increment)
   const decrement = useCartStore((s) => s.decrement)
   const removeItem = useCartStore((s) => s.removeItem)
 
+  const subtotal = items.reduce((acc, i) => acc + i.product.price * i.quantity, 0)
+  const totalItems = items.reduce((acc, i) => acc + i.quantity, 0)
   const isEmpty = items.length === 0
   const shipping = 45.0
   const tax = subtotal * 0.05
@@ -49,7 +49,7 @@ export function CartPage() {
     <div className="mx-auto max-w-[1440px] px-6 py-16 md:px-8">
       <h1 className="font-headline text-4xl font-extrabold tracking-tight">{CART_TITLE}</h1>
       <p className="mt-2 text-on-surface-variant font-label">
-        {totalItems()} componentes seleccionados.
+        {totalItems} componentes seleccionados.
       </p>
 
       <div className="mt-12 grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
