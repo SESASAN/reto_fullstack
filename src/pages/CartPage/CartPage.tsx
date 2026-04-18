@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom'
-
-import { Button, IconButton } from '@/components/atoms'
+/* import { Button, IconButton } from '@/components/atoms' */
+import { Button } from '@/components/atoms'
 import { formatPrice } from '@/styles/formatPrice'
 import { useCartStore } from '@/store/cart.store'
 

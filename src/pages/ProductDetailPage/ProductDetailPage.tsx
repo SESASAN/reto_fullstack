@@ -1,7 +1,7 @@
 import { useEffect } from 'react'
 import { Link, useParams } from 'react-router-dom'
-
-import { Button, IconButton } from '@/components/atoms'
+/* import { Button, IconButton } from '@/components/atoms' */
+import { Button } from '@/components/atoms'
 import { parseProductIdFromSlug } from '@/services/slugify'
 import { formatPrice } from '@/styles/formatPrice'
 import { useCartStore } from '@/store/cart.store'

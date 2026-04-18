@@ -13,11 +13,16 @@ const sizeClass: Record<InputSize, string> = {
 }
 
 export const Input = forwardRef<HTMLInputElement, InputProps>(function Input(
-  { size = 'md', error, className, ...props },
+  { size = 'md', error, className, label, ...props },
   ref,
 ) {
   return (
     <div className="w-full">
+      {label ? (
+        <label className="mb-2 block text-sm font-medium text-on-surface">
+          {label}
+        </label>
+      ) : null}
       <input
         ref={ref}
         className={cn(
