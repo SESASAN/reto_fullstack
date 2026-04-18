@@ -138,7 +138,7 @@ export function LoginPage() {
               </div>
               {touched.email && formData.email && !isValidEmail(formData.email) && (
                 <p className="text-xs text-error mt-1 ml-1">
-                  Correo electronico invalido
+                  Correo electrónico inválido
                 </p>
               )}
             </div>

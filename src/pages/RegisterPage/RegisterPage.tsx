@@ -164,7 +164,7 @@ export function RegisterPage() {
                 className="font-label text-xs uppercase tracking-widest text-outline-variant block ml-1"
                 htmlFor="email"
               >
-                Correo Electronico
+                Correo Electrónico
               </label>
               <div className="relative group">
                 <span className="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-outline-variant group-focus-within:text-primary transition-colors">
@@ -187,7 +187,7 @@ export function RegisterPage() {
               </div>
               {touched.email && formData.email && !isValidEmail(formData.email) && (
                 <p className="text-xs text-error mt-1 ml-1">
-                  Correo electronico invalido
+                  Correo electrónico inválido
                 </p>
               )}
             </div>
@@ -313,7 +313,7 @@ export function RegisterPage() {
               className="text-primary hover:text-primary-container transition-colors ml-1 underline decoration-primary/20 underline-offset-4"
               to="/login"
             >
-              Iniciar Sesion
+              Iniciar Sesión
             </Link>
           </p>
         </div>

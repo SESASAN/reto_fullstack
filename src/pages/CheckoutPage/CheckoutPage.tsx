@@ -143,7 +143,7 @@ export function CheckoutPage() {
               Secure Checkout
             </h1>
             <p className="text-on-surface-variant">
-              Completa tu orden para finalizar la compra.
+              Completa tu órden para finalizar la compra.
             </p>
           </div>
 

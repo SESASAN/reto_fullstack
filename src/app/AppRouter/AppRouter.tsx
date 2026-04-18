@@ -9,6 +9,7 @@ import { FeaturedPage } from '@/pages/FeaturedPage'
 import { HomePage } from '@/pages/HomePage'
 import { LoginPage } from '@/pages/LoginPage'
 import { NotFoundPage } from '@/pages/NotFoundPage'
+import { OrdersPage } from '@/pages/OrdersPage'
 import { ProductDetailPage } from '@/pages/ProductDetailPage'
 import { RegisterPage } from '@/pages/RegisterPage'
 import { UiKitPage } from '@/pages/UiKitPage'
@@ -61,6 +62,14 @@ export const router = createBrowserRouter([
           <GuestRoute>
             <RegisterPage />
           </GuestRoute>
+        ),
+      },
+      {
+        path: '/orders',
+        element: (
+          <ProtectedRoute>
+            <OrdersPage />
+          </ProtectedRoute>
         ),
       },
       { path: '/ui', element: <UiKitPage /> },

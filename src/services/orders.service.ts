@@ -72,16 +72,32 @@ export async function createOrder(data: CreateOrderData): Promise<string> {
   return docRef.id
 }
 
-export async function getOrdersByUser(userId: string): Promise<Order[]> {
+export type GetOrdersParams = {
+  userId: string
+  limit?: number
+  startAfter?: Date
+  month?: number // 1-12
+  year?: number
+}
+
+export type GetOrdersResult = {
+  orders: Order[]
+  hasMore: boolean
+  total: number
+}
+
+export async function getOrdersByUser(params: GetOrdersParams): Promise<GetOrdersResult> {
+  const { userId, limit = 5, startAfter, month, year } = params
+
+  // Get all orders for user (we'll filter client-side for month/year + pagination)
   const q = query(
     ordersCollection,
     where('userId', '==', userId),
-    orderBy('createdAt', 'desc'),
   )
 
   const snapshot = await getDocs(q)
 
-  return snapshot.docs.map((doc) => {
+  let orders = snapshot.docs.map((doc) => {
     const data = doc.data()
     return {
       id: doc.id,
@@ -96,6 +112,50 @@ export async function getOrdersByUser(userId: string): Promise<Order[]> {
       createdAt: data.createdAt?.toDate() || new Date(),
     } as Order
   })
+
+  // Sort client-side by createdAt descending
+  orders = orders.sort((a, b) => 
+    (b.createdAt?.getTime() || 0) - (a.createdAt?.getTime() || 0)
+  )
+
+  // Filter by month and year if provided
+  if (month || year) {
+    orders = orders.filter((order) => {
+      const orderDate = order.createdAt
+      if (month && year) {
+        return orderDate.getMonth() + 1 === month && orderDate.getFullYear() === year
+      }
+      if (month) {
+        return orderDate.getMonth() + 1 === month
+      }
+      if (year) {
+        return orderDate.getFullYear() === year
+      }
+      return true
+    })
+  }
+
+  const total = orders.length
+
+  // Apply startAfter pagination
+  if (startAfter) {
+    const startIndex = orders.findIndex(
+      (o) => o.createdAt.getTime() <= startAfter.getTime()
+    )
+    if (startIndex > 0) {
+      orders = orders.slice(startIndex)
+    }
+  }
+
+  // Apply limit
+  const paginatedOrders = orders.slice(0, limit + 1)
+  const hasMore = paginatedOrders.length > limit
+
+  return {
+    orders: paginatedOrders.slice(0, limit),
+    hasMore,
+    total,
+  }
 }
 
 export async function getOrderById(orderId: string): Promise<Order | null> {
