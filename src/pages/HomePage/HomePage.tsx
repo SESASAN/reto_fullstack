@@ -1,4 +1,5 @@
 import { useEffect } from 'react'
+import { useNavigate } from 'react-router-dom'
 
 import { NewsletterCallout } from '@/components/organisms/NewsletterCallout'
 import { HeroSection } from '@/components/organisms/HeroSection'
@@ -13,6 +14,7 @@ import { useProductsStore } from '@/store/products.store'
 import { useUiStore } from '@/store/ui.store'
 
 export function HomePage() {
+  const navigate = useNavigate()
   const products = useProductsStore((s) => s.products)
   const isLoading = useProductsStore((s) => s.isLoading)
   const error = useProductsStore((s) => s.error)
@@ -46,7 +48,7 @@ export function HomePage() {
 
   return (
     <div>
-      <HeroSection />
+      <HeroSection onPrimaryClick={() => window.scrollTo({ top: 400, behavior: 'smooth' })} onSecondaryClick={() => navigate('/featured')} />
       <ProductGridSection
         products={paginatedProducts}
         currentPage={safeCurrentPage}

@@ -1,0 +1,1 @@
+export { FeaturedPage } from './FeaturedPage'

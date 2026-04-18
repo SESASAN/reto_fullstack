@@ -1,0 +1,1 @@
+export const FEATURED_TITLE = 'Productos destacados'

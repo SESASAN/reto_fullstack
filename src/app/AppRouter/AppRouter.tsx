@@ -4,6 +4,7 @@ import { MainLayout } from '@/components/templates/MainLayout'
 
 import { CartPage } from '@/pages/CartPage'
 import { CheckoutPage } from '@/pages/CheckoutPage'
+import { FeaturedPage } from '@/pages/FeaturedPage'
 import { HomePage } from '@/pages/HomePage'
 import { LoginPage } from '@/pages/LoginPage'
 import { NotFoundPage } from '@/pages/NotFoundPage'
@@ -17,6 +18,7 @@ export const router = createBrowserRouter([
     errorElement: <NotFoundPage />, // fallback for routing errors
     children: [
       { path: '/', element: <HomePage /> },
+      { path: '/featured', element: <FeaturedPage /> },
       { path: '/products/:slug', element: <ProductDetailPage /> },
       { path: '/cart', element: <CartPage /> },
       { path: '/checkout', element: <CheckoutPage /> },
