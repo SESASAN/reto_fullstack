@@ -2,6 +2,7 @@ import { createBrowserRouter, Navigate } from 'react-router-dom'
 
 import { MainLayout } from '@/components/templates/MainLayout'
 
+import { AuthGuard } from '@/components/molecules/AuthGuard'
 import { CartPage } from '@/pages/CartPage'
 import { CheckoutPage } from '@/pages/CheckoutPage'
 import { FeaturedPage } from '@/pages/FeaturedPage'
@@ -12,6 +13,16 @@ import { ProductDetailPage } from '@/pages/ProductDetailPage'
 import { RegisterPage } from '@/pages/RegisterPage'
 import { UiKitPage } from '@/pages/UiKitPage'
 
+// Protected routes - require auth
+function ProtectedRoute({ children }: { children: React.ReactNode }) {
+  return <AuthGuard requireAuth>{children}</AuthGuard>
+}
+
+// Guest routes - for logged out users only (login/register)
+function GuestRoute({ children }: { children: React.ReactNode }) {
+  return <AuthGuard requireAuth={false}>{children}</AuthGuard>
+}
+
 export const router = createBrowserRouter([
   {
     element: <MainLayout />,
@@ -20,10 +31,38 @@ export const router = createBrowserRouter([
       { path: '/', element: <HomePage /> },
       { path: '/featured', element: <FeaturedPage /> },
       { path: '/products/:slug', element: <ProductDetailPage /> },
-      { path: '/cart', element: <CartPage /> },
-      { path: '/checkout', element: <CheckoutPage /> },
-      { path: '/login', element: <LoginPage /> },
-      { path: '/register', element: <RegisterPage /> },
+      {
+        path: '/cart',
+        element: (
+          <ProtectedRoute>
+            <CartPage />
+          </ProtectedRoute>
+        ),
+      },
+      {
+        path: '/checkout',
+        element: (
+          <ProtectedRoute>
+            <CheckoutPage />
+          </ProtectedRoute>
+        ),
+      },
+      {
+        path: '/login',
+        element: (
+          <GuestRoute>
+            <LoginPage />
+          </GuestRoute>
+        ),
+      },
+      {
+        path: '/register',
+        element: (
+          <GuestRoute>
+            <RegisterPage />
+          </GuestRoute>
+        ),
+      },
       { path: '/ui', element: <UiKitPage /> },
 
       // Alias friendly URLs (optional)
