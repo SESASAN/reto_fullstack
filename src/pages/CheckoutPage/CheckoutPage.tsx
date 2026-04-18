@@ -54,10 +54,7 @@ export function CheckoutPage() {
     formData.address &&
     formData.city &&
     formData.state &&
-    formData.zip &&
-    formData.cardNumber &&
-    formData.expiry &&
-    formData.cvv
+    formData.zip
 
   if (items.length === 0 && !orderComplete) {
     return (
