@@ -1,16 +1,21 @@
 import { useState } from 'react'
 
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 
 import { Button, Input } from '@/components/atoms'
 import { formatPrice } from '@/styles/formatPrice'
 import { useCartStore } from '@/store/cart.store'
+import { useSessionStore } from '@/store/session.store'
+import { createOrder } from '@/services/orders.service'
 
 import { CHECKOUT_TITLE } from './CheckoutPage.constants'
 
 export function CheckoutPage() {
+  const navigate = useNavigate()
   const items = useCartStore((s) => s.items)
   const clear = useCartStore((s) => s.clear)
+
+  const user = useSessionStore((s) => s.user)
 
   const subtotal = items.reduce((acc, i) => acc + i.product.price * i.quantity, 0)
   const shipping = 25.0
@@ -37,15 +42,33 @@ export function CheckoutPage() {
     setFormData((prev) => ({ ...prev, [field]: value }))
   }
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
+
+    if (!user) {
+      return
+    }
+
     setIsProcessing(true)
 
-    setTimeout(() => {
-      setIsProcessing(false)
+    try {
+      await createOrder({
+        userId: user.uid,
+        email: user.email || '',
+        items,
+        subtotal,
+        shipping,
+        tax,
+        total,
+      })
+
       setOrderComplete(true)
       clear()
-    }, 2000)
+    } catch (err) {
+      console.error('Error creating order:', err)
+    } finally {
+      setIsProcessing(false)
+    }
   }
 
   const isFormValid =
