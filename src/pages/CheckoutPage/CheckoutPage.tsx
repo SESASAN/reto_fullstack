@@ -36,9 +36,33 @@ export function CheckoutPage() {
   const [paymentMethod, setPaymentMethod] = useState<'credit' | 'paypal'>('credit')
   const [isProcessing, setIsProcessing] = useState(false)
   const [orderComplete, setOrderComplete] = useState(false)
+  const [errors, setErrors] = useState<Record<string, string>>({})
+
+  const validateField = (field: string, value: string) => {
+    let error = ''
+    if (!value) {
+      error = 'Este campo es obligatorio'
+    } else if (field === 'address') {
+      if (value.length < 5) {
+        error = 'Dirección muy corta'
+      }
+    } else {
+      if (field === 'zip' && !/^\d+$/.test(value)) {
+        error = 'El código postal debe ser numérico'
+      } else if (field === 'cardNumber' && !/^\d{16}$/.test(value.replace(/\s/g, ''))) {
+        error = 'Debe tener 16 dígitos'
+      } else if (field === 'expiry' && !/^(0[1-9]|1[0-2])\/\d{2}$/.test(value)) {
+        error = 'Formato inválido (MM/YY)'
+      } else if (field === 'cvv' && !/^\d{3}$/.test(value)) {
+        error = 'Debe tener 3 dígitos'
+      }
+    }
+    setErrors((prev) => ({ ...prev, [field]: error }))
+  }
 
   const updateField = (field: string, value: string) => {
     setFormData((prev) => ({ ...prev, [field]: value }))
+    validateField(field, value)
   }
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -79,12 +103,14 @@ export function CheckoutPage() {
   }
 
   const isFormValid =
+    Object.values(errors).every((err) => !err) &&
     formData.firstName &&
     formData.lastName &&
     formData.address &&
     formData.city &&
     formData.state &&
-    formData.zip
+    formData.zip &&
+    (paymentMethod === 'paypal' || (formData.cardNumber && formData.expiry && formData.cvv))
 
   if (items.length === 0 && !orderComplete) {
     return (
@@ -165,49 +191,55 @@ export function CheckoutPage() {
               </h2>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              <Input
-                label="Nombre"
-                placeholder="John"
-                value={formData.firstName}
-                onChange={(e) => updateField('firstName', e.target.value)}
-              />
-              <Input
-                label="Apellido"
-                placeholder="Doe"
-                value={formData.lastName}
-                onChange={(e) => updateField('lastName', e.target.value)}
-              />
-              <div className="md:col-span-2">
+<div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <Input
-                  label="Dirección"
-                  placeholder="123 Calle Principal"
-                  value={formData.address}
-                  onChange={(e) => updateField('address', e.target.value)}
+                  label="Nombre"
+                  placeholder="John"
+                  value={formData.firstName}
+                  onChange={(e) => updateField('firstName', e.target.value)}
+                  error={errors.firstName}
                 />
+                <Input
+                  label="Apellido"
+                  placeholder="Doe"
+                  value={formData.lastName}
+                  onChange={(e) => updateField('lastName', e.target.value)}
+                  error={errors.lastName}
+                />
+                <div className="md:col-span-2">
+                  <Input
+                    label="Dirección"
+                    placeholder="Calle y número"
+                    value={formData.address}
+                    onChange={(e) => updateField('address', e.target.value)}
+                    error={errors.address}
+                  />
+                </div>
+                <Input
+                  label="Ciudad"
+                  placeholder="Ciudad"
+                  value={formData.city}
+                  onChange={(e) => updateField('city', e.target.value)}
+                  error={errors.city}
+                />
+                <div className="grid grid-cols-2 gap-4">
+                  <Input
+                    label="Estado"
+                    placeholder="ST"
+                    value={formData.state}
+                    onChange={(e) => updateField('state', e.target.value)}
+                    error={errors.state}
+                  />
+                  <Input
+                    label="Código postal"
+                    placeholder="10101"
+                    value={formData.zip}
+                    onChange={(e) => updateField('zip', e.target.value)}
+                    error={errors.zip}
+                  />
+                </div>
               </div>
-              <Input
-                label="Ciudad"
-                placeholder="Ciudad"
-                value={formData.city}
-                onChange={(e) => updateField('city', e.target.value)}
-              />
-              <div className="grid grid-cols-2 gap-4">
-                <Input
-                  label="Estado"
-                  placeholder="ST"
-                  value={formData.state}
-                  onChange={(e) => updateField('state', e.target.value)}
-                />
-                <Input
-                  label="Código postal"
-                  placeholder="10101"
-                  value={formData.zip}
-                  onChange={(e) => updateField('zip', e.target.value)}
-                />
-              </div>
-            </div>
-          </section>
+            </section>
 
           {/* Payment Form */}
           <section className="rounded-xl bg-surface-container p-8 shadow-2xl space-y-8">
