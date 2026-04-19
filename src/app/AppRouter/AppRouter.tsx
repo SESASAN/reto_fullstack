@@ -35,11 +35,8 @@ export const router = createBrowserRouter([
       { path: '/products/:slug', element: <ProductDetailPage /> },
       {
         path: '/cart',
-        element: (
-          <ProtectedRoute>
-            <CartPage />
-          </ProtectedRoute>
-        ),
+        // Cart accessible without login — checkout redirects to login if needed
+        element: <CartPage />,
       },
       {
         path: '/checkout',

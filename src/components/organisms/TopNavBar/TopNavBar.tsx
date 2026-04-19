@@ -8,7 +8,7 @@ import { useCartStore } from '@/store/cart.store'
 import { useSessionStore } from '@/store/session.store'
 import { useUiStore } from '@/store/ui.store'
 
-import { BRAND_NAME, NAV_LINKS } from './TopNavBar.constants'
+import { BRAND_NAME, NAV_LINKS_PUBLIC, NAV_LINKS_PRIVATE } from './TopNavBar.constants'
 import type { TopNavBarLink } from './TopNavBar.types'
 
 const navLinkClass = ({ isActive }: { isActive: boolean }) =>
@@ -41,6 +41,8 @@ export function TopNavBar() {
   const user = useSessionStore((s) => s.user)
   const logout = useSessionStore((s) => s.logout)
 
+  const navLinks = user ? NAV_LINKS_PRIVATE : NAV_LINKS_PUBLIC
+
   const handleLogout = async () => {
     await logout()
     setMenuOpen(false)
@@ -61,9 +63,9 @@ export function TopNavBar() {
           <SearchBar value={searchQuery} onChange={setSearchQuery} />
         </div>
 
-<nav className="hidden items-center gap-8 md:flex">
-              {NAV_LINKS.filter((link) => !user || link.to !== '/login').map(renderLink)}
-            </nav>
+        <nav className="hidden items-center gap-8 md:flex">
+          {navLinks.map(renderLink)}
+        </nav>
 
         <div className="flex items-center gap-3">
           <NavLink to="/cart">
