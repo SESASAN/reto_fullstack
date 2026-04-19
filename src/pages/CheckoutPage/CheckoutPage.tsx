@@ -1,6 +1,6 @@
 import { useState } from 'react'
 
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 
 import { Button, Input } from '@/components/atoms'
 import { formatPrice } from '@/styles/formatPrice'
@@ -35,8 +35,8 @@ export function CheckoutPage() {
 
   const [paymentMethod, setPaymentMethod] = useState<'credit' | 'paypal'>('credit')
   const [isProcessing, setIsProcessing] = useState(false)
-  const [orderComplete, setOrderComplete] = useState(false)
   const [errors, setErrors] = useState<Record<string, string>>({})
+  const navigate = useNavigate()
 
   const validateField = (field: string, value: string) => {
     let error = ''
@@ -75,7 +75,7 @@ export function CheckoutPage() {
     setIsProcessing(true)
 
     try {
-      await createOrder({
+      const newOrderId = await createOrder({
         userId: user.uid,
         email: user.email || '',
         items,
@@ -93,8 +93,8 @@ export function CheckoutPage() {
         },
       })
 
-      setOrderComplete(true)
       clear()
+      navigate(`/order-success/${newOrderId}`)
     } catch (err) {
       console.error('Error creating order:', err)
     } finally {
@@ -112,7 +112,7 @@ export function CheckoutPage() {
     formData.zip &&
     (paymentMethod === 'paypal' || (formData.cardNumber && formData.expiry && formData.cvv))
 
-  if (items.length === 0 && !orderComplete) {
+  if (items.length === 0) {
     return (
       <div className="mx-auto max-w-[1440px] px-6 py-16 md:px-8">
         <h1 className="font-headline text-3xl font-extrabold tracking-tight">
@@ -133,32 +133,6 @@ export function CheckoutPage() {
           <Link to="/">
             <Button variant="primary" className="mt-8">
               Volver al catálogo
-            </Button>
-          </Link>
-        </div>
-      </div>
-    )
-  }
-
-  if (orderComplete) {
-    return (
-      <div className="mx-auto max-w-[1440px] px-6 py-16 md:px-8">
-        <div className="flex flex-col items-center justify-center text-center">
-          <div className="flex h-24 w-24 items-center justify-center rounded-full bg-primary/20">
-            <span className="material-symbols-outlined text-5xl text-primary">
-              check_circle
-            </span>
-          </div>
-          <h1 className="mt-8 font-headline text-4xl font-extrabold tracking-tight">
-            ¡Pedido confirmado!
-          </h1>
-          <p className="mt-4 max-w-md text-on-surface-variant">
-            Gracias por tu compra. Recibirás un email de confirmación con los
-            detalles de tu pedido.
-          </p>
-          <Link to="/">
-            <Button variant="primary" className="mt-8">
-              Seguir comprando
             </Button>
           </Link>
         </div>

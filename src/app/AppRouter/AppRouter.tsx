@@ -10,6 +10,7 @@ import { HomePage } from '@/pages/HomePage'
 import { LoginPage } from '@/pages/LoginPage'
 import { NotFoundPage } from '@/pages/NotFoundPage'
 import { OrderDetailPage } from '@/pages/OrderDetailPage'
+import { OrderSuccessPage } from '@/pages/OrderSuccessPage'
 import { OrdersPage } from '@/pages/OrdersPage'
 import { ProductDetailPage } from '@/pages/ProductDetailPage'
 import { RegisterPage } from '@/pages/RegisterPage'
@@ -45,6 +46,10 @@ export const router = createBrowserRouter([
             <CheckoutPage />
           </ProtectedRoute>
         ),
+      },
+      {
+        path: '/order-success/:orderId',
+        element: <OrderSuccessPage />,
       },
       {
         path: '/login',
