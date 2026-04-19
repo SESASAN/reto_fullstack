@@ -14,8 +14,7 @@ import type { HeroSectionProps } from './HeroSection.types'
 export function HeroSection({ onPrimaryClick, onSecondaryClick }: HeroSectionProps) {
   return (
     <section className="relative overflow-hidden">
-      {/* Background fuera del Container para que cubra todo el ancho */}
-      <div className="pointer-events-none absolute inset-0 -z-10 bg-obsidian-hero" />
+      <div className="pointer-events-none absolute inset-0 -z-20 bg-obsidian-hero" />
       
       <Container className="relative flex min-h-[520px] items-center py-16 md:min-h-[720px]">
         <div className="relative z-10 max-w-2xl">
@@ -47,10 +46,9 @@ export function HeroSection({ onPrimaryClick, onSecondaryClick }: HeroSectionPro
           <img
             src={heroImg}
             alt=""
-            className="h-full w-full object-cover"
+            className="h-full w-full object-contain drop-shadow-[0_20px_40px_rgba(142,127,255,0.4)]"
             aria-hidden="true"
           />
-          <div className="absolute inset-0 bg-gradient-to-l from-transparent via-background/20 to-background" />
         </div>
       </Container>
     </section>

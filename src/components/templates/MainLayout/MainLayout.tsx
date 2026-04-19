@@ -5,7 +5,7 @@ import { TopNavBar } from '@/components/organisms/TopNavBar'
 
 export function MainLayout() {
   return (
-    <div className="min-h-screen flex flex-col bg-background text-on-surface">
+    <div className="min-h-screen flex flex-col bg-transparent text-on-surface relative">
       <TopNavBar />
 
       <main className="flex-grow pt-20">
