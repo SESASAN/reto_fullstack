@@ -1,57 +1,97 @@
 # OBSIDIAN — E-commerce SPA
 
-E-commerce SPA estilo **OBSIDIAN** (dark premium).
+Entrega 2 — Proyecto de Taller de Desarrollo Web (UPB)
 
-## Características
-- Navegación SPA (React Router)
-- Catálogo desde API (**FakeStore API**)
+## Caracteristicas
+
+### Vistas requeridas
+- Home — Catalogo con buscador, paginacion, filtros
+- Detalle — Pagina de producto individual
+- Carrito — Carrito de compras con gestion de items
+- Checkout — Formulario de envio y confirmacion
+- Autenticacion — Login/Register con Firebase Auth
+
+### Tecnologias
+- Frontend: React.js + Vite.js + TypeScript
+- Estilos: Tailwind CSS (tema OBSIDIAN dark premium)
+- Estado: Zustand con persistencia localStorage
+- Backend: Firebase Auth + Firestore (BaaS)
+- API: FakeStore API (productos)
+
+### Funcionalidades implementadas
+- Navegacion SPA (React Router)
+- Catalogo desde API (FakeStore API)
 - Buscador en tiempo real
-- Paginación (6–8 por página)
-- Carrito funcional + previsualización de checkout
-- Autenticación y órdenes: Firebase Auth + Firestore
+- Paginacion (6-8 productos por pagina)
+- Vista grid/list de productos
+- Pagina de productos destacados (5 aleatorios)
+- Diseno responsive (mobile-first)
+- Menu movil desplegable
+- Carrito persistente
+- Checkout con validacion de envio
+- Ordenes guardadas en Firestore
+- Tema oscuro premium con glows animados
+- Icono de obsidiana (SVG) en Hero y favicon
 
-## Tecnologías
-- Runtime / package manager: **Bun**
-- Frontend: **Vite + React + TypeScript**
-- UI: **Tailwind CSS** (tema OBSIDIAN)
-- Estado global: **Zustand** (con persistencia a localStorage)
-- HTTP client: **Axios**
-- Backend como servicio (BaaS): **Firebase Auth + Firestore**
-- API de productos: https://fakestoreapi.com/
+## Arquitectura
 
-## Arquitectura de carpetas
-Seguimos Atomic Design + colocation por componente (para no sobrecargar `App.tsx`).
+Atomic Design + colocation por componente:
+- components/atoms/ — Button, Input, Badge, IconButton, Container
+- components/molecules/ — ProductCard, SearchBar, AuthGuard
+- components/organisms/ — TopNavBar, Footer, HeroSection, ProductGrid
+- components/templates/ — MainLayout
+- pages/ — HomePage, ProductDetailPage, CartPage, CheckoutPage, LoginPage, RegisterPage, OrdersPage, FeaturedPage
+- store/ — Zustand stores (cart, session, ui, products)
+- services/ — Firebase, Orders, Slugify
+- styles/ — Utilities (cn, formatPrice)
 
-Cada componente vive en su propia carpeta y separa:
-- `Component.tsx`
-- `Component.types.ts`
-- `Component.constants.ts`
-- `index.ts`
-- (opcional) `Component.module.css` solo si Tailwind no alcanza para algún efecto específico.
+## Deploy
 
-## Importante: sin backend separado
-Este proyecto **NO** tiene backend propio.
-El frontend se conecta directo a Firebase (Auth/Firestore) y a FakeStore API.
-No se usan **Firebase Functions**.
+### Cloudflare Pages (recomendado)
+1. Conectar repositorio GitHub
+2. Build command: bun run build
+3. Output: dist
+4. Agregar variables de entorno en Production:
 
-## Seguridad (Firebase)
-Como el cliente habla directo con Firestore, la seguridad depende 100% de **Security Rules**.
-Regla de oro: **negar por defecto**. Nunca usar `allow read, write: if true`.
+VITE_FIREBASE_API_KEY=...
+VITE_FIREBASE_AUTH_DOMAIN=...
+VITE_FIREBASE_PROJECT_ID=...
+VITE_FIREBASE_STORAGE_BUCKET=...
+VITE_FIREBASE_MESSAGING_SENDER_ID=...
+VITE_FIREBASE_APP_ID=...
 
-## Requisitos
-1) Instalar Bun (una vez)
-   - Windows (PowerShell): `powershell -c "irm bun.sh/install.ps1|iex"`
+### Firebase Hosting (alternativo)
+firebase init hosting
+firebase deploy
 
-2) Instalar dependencias
-```bash
+## Requisitos para ejecutar
+
+# Instalar Bun
+powershell -c "irm bun.sh/install.ps1|iex"
+
+# Instalar dependencias
 bun install
-```
 
-## Ejecutar en desarrollo
-```bash
+# Configurar variables de entorno
+cp .env.example .env
+
+# Ejecutar
 bun dev
-```
 
-## Variables de entorno (Firebase)
-Crear un archivo `.env` (no se commitea) con las credenciales de tu proyecto Firebase.
-Se documentará un `.env.example` cuando integremos Firebase.
+## Build para produccion
+
+bun run build
+# Output en dist/
+
+## Seguridad
+
+Firestore Security Rules configur el acceso a datos. Regla base: denegar por defecto.
+
+## Capturas de pantalla
+
+El proyecto incluye tema oscuro premium con:
+- Glows violetas animados en el fondo
+- Icono de obsidiana en el Hero
+- Botones responsive para movil (+ en vez de texto)
+- Menu desplegable en movil
+- Diseno consistente en todas las paginas
