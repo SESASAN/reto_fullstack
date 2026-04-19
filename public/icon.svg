@@ -1,0 +1,61 @@
+<svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+  <!-- Transparent background -->
+  <rect width="200" height="200" fill="transparent"/>
+  <defs>
+    <linearGradient id="obs-top" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#4a3a6a"/>
+      <stop offset="100%" stop-color="#2d1f4a"/>
+    </linearGradient>
+
+    <linearGradient id="obs-left" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#3d2a5a"/>
+      <stop offset="100%" stop-color="#1f1440"/>
+    </linearGradient>
+
+    <linearGradient id="obs-right" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#2a1a4a"/>
+      <stop offset="100%" stop-color="#1a0f35"/>
+    </linearGradient>
+
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="2" result="coloredBlur"/>
+      <feMerge>
+        <feMergeNode in="coloredBlur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+
+  <!-- Faces -->
+  <polygon points="40,70 100,40 160,70 100,100" fill="url(#obs-top)"/>
+  <polygon points="40,70 100,100 100,170 40,140" fill="url(#obs-left)"/>
+  <polygon points="160,70 100,100 100,170 160,140" fill="url(#obs-right)"/>
+
+  <!-- Shine -->
+  <polygon points="55,65 85,50 115,65 85,80" fill="white" opacity="0.10"/>
+  <circle cx="75" cy="60" r="8" fill="white" opacity="0.15" filter="url(#glow)"/>
+
+  <!-- Outer edges -->
+  <polyline points="40,70 100,40 160,70 160,140 100,170 40,140 40,70"
+            fill="none"
+            stroke="#5a4a7a"
+            stroke-width="2"
+            stroke-linejoin="round"
+            stroke-linecap="round"/>
+
+  <!-- Inner edges (sin línea en la cara superior) -->
+  <line x1="40" y1="70" x2="100" y2="100"
+        stroke="#4b3a70"
+        stroke-width="2"
+        stroke-linecap="round"/>
+
+  <line x1="160" y1="70" x2="100" y2="100"
+        stroke="#3a2a5c"
+        stroke-width="2"
+        stroke-linecap="round"/>
+
+  <line x1="100" y1="100" x2="100" y2="170"
+        stroke="#3b2b5f"
+        stroke-width="2"
+        stroke-linecap="round"/>
+</svg>
