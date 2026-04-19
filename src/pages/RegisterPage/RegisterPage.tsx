@@ -2,10 +2,7 @@ import { useState } from 'react'
 
 import { Link, useNavigate } from 'react-router-dom'
 
-import { Button, Input } from '@/components/atoms'
 import { useSessionStore } from '@/store/session.store'
-
-import { REGISTER_TITLE } from './RegisterPage.constants'
 
 export function RegisterPage() {
   const navigate = useNavigate()

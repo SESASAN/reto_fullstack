@@ -52,7 +52,7 @@ const mapFirebaseUser = (user: FirebaseUser): UserData => ({
 
 export const useSessionStore = create<SessionState>()(
   persist(
-    (set, get) => ({
+    (set) => ({
       user: null,
       isLoading: true,
       error: null,

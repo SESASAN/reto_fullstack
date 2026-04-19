@@ -56,7 +56,7 @@ export function OrdersPage() {
   const [isLoading, setIsLoading] = useState(true)
   const [hasMore, setHasMore] = useState(false)
   const [total, setTotal] = useState(0)
-  const [page, setPage] = useState(0)
+  const [, setPage] = useState(0)
 
   // Filter states
   const [selectedMonth, setSelectedMonth] = useState(0)

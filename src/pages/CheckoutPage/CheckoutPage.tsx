@@ -1,6 +1,6 @@
 import { useState } from 'react'
 
-import { Link, useNavigate } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 
 import { Button, Input } from '@/components/atoms'
 import { formatPrice } from '@/styles/formatPrice'
@@ -11,7 +11,6 @@ import { createOrder } from '@/services/orders.service'
 import { CHECKOUT_TITLE } from './CheckoutPage.constants'
 
 export function CheckoutPage() {
-  const navigate = useNavigate()
   const items = useCartStore((s) => s.items)
   const clear = useCartStore((s) => s.clear)
 
