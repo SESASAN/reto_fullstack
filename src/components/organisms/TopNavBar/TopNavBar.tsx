@@ -1,6 +1,6 @@
 import { useState } from 'react'
 
-import { NavLink, useNavigate } from 'react-router-dom'
+import { NavLink, useNavigate, useLocation } from 'react-router-dom'
 
 import { Container, IconButton } from '@/components/atoms'
 import { SearchBar } from '@/components/molecules/SearchBar'
@@ -32,6 +32,7 @@ const renderLink = (link: TopNavBarLink) => (
 
 export function TopNavBar() {
   const navigate = useNavigate()
+  const location = useLocation()
   const [menuOpen, setMenuOpen] = useState(false)
 
   const totalItems = useCartStore((s) => s.totalItems())
@@ -40,6 +41,10 @@ export function TopNavBar() {
 
   const user = useSessionStore((s) => s.user)
   const logout = useSessionStore((s) => s.logout)
+
+  // Hide cart on login/register pages
+  const isAuthPage = location.pathname === '/login' || location.pathname === '/register'
+  const showCart = !isAuthPage
 
   const navLinks = user ? NAV_LINKS_PRIVATE : NAV_LINKS_PUBLIC
 
@@ -68,6 +73,7 @@ export function TopNavBar() {
         </nav>
 
         <div className="flex items-center gap-3">
+          {showCart && (
           <NavLink to="/cart">
             <div className="relative">
               <IconButton
@@ -85,6 +91,7 @@ export function TopNavBar() {
               ) : null}
             </div>
           </NavLink>
+          )}
 
           <div className="relative">
             {user ? (

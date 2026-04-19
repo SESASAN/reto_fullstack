@@ -29,7 +29,7 @@ export function ProductGrid({
   return (
     <div
       className={isGrid
-        ? 'mt-10 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4'
+        ? 'mt-10 grid grid-cols-2 gap-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4'
         : 'mt-10 flex flex-col gap-4'
       }
     >

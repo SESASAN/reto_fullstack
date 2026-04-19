@@ -2,6 +2,7 @@ import { useState } from 'react'
 
 import { Link, useNavigate } from 'react-router-dom'
 
+import { Container } from '@/components/atoms'
 import { useSessionStore } from '@/store/session.store'
 
 export function RegisterPage() {
@@ -104,12 +105,12 @@ export function RegisterPage() {
     formData.confirmPassword
 
   return (
-    <main className="flex-grow flex items-center justify-center px-6 py-12 relative overflow-hidden">
+    <Container className="flex-grow flex items-center justify-center py-12 relative overflow-hidden">
       {/* Ambient Aesthetic Elements */}
       <div className="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] bg-primary/10 blur-[120px] rounded-full" />
       <div className="absolute bottom-[-10%] right-[-10%] w-[30%] h-[30%] bg-secondary/5 blur-[100px] rounded-full" />
 
-      <div className="w-full max-w-xl px-6 py-12 relative z-10">
+      <div className="w-full max-w-xl py-12 relative z-10">
         {/* Brand Header */}
         <div className="mb-10 text-center">
           <h1 className="font-headline text-4xl font-black tracking-tighter text-on-surface uppercase mb-2">
@@ -315,6 +316,6 @@ export function RegisterPage() {
           </p>
         </div>
       </div>
-    </main>
+    </Container>
   )
 }

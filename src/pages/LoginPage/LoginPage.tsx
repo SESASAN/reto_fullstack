@@ -2,6 +2,7 @@ import { useState } from 'react'
 
 import { Link, useNavigate } from 'react-router-dom'
 
+import { Container } from '@/components/atoms'
 import { useSessionStore } from '@/store/session.store'
 
 export function LoginPage() {
@@ -75,7 +76,7 @@ export function LoginPage() {
   const isFormValid = formData.email && formData.password
 
   return (
-    <main className="flex-grow flex items-center justify-center px-6 py-12 relative overflow-hidden">
+    <Container className="flex-grow flex items-center justify-center py-12 relative overflow-hidden">
       {/* Decorative Ambient Elements */}
       <div className="absolute top-[-10%] right-[-5%] w-96 h-96 bg-primary/10 rounded-full blur-[120px]" />
       <div className="absolute bottom-[-10%] left-[-5%] w-80 h-80 bg-primary-container/5 rounded-full blur-[100px]" />
@@ -242,6 +243,6 @@ export function LoginPage() {
           </p>
         </div>
       </div>
-    </main>
+    </Container>
   )
 }
