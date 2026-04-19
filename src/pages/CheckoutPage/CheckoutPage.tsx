@@ -60,6 +60,14 @@ export function CheckoutPage() {
         shipping,
         tax,
         total,
+        shippingInfo: {
+          firstName: formData.firstName,
+          lastName: formData.lastName,
+          address: formData.address,
+          city: formData.city,
+          state: formData.state,
+          zip: formData.zip,
+        },
       })
 
       setOrderComplete(true)

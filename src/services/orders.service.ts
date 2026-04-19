@@ -34,6 +34,15 @@ export type Order = {
   total: number
   status: OrderStatus
   createdAt: Date
+  // Shipping info from checkout form
+  shippingInfo?: {
+    firstName: string
+    lastName: string
+    address: string
+    city: string
+    state: string
+    zip: string
+  }
 }
 
 export type CreateOrderData = {
@@ -44,6 +53,14 @@ export type CreateOrderData = {
   shipping: number
   tax: number
   total: number
+  shippingInfo?: {
+    firstName: string
+    lastName: string
+    address: string
+    city: string
+    state: string
+    zip: string
+  }
 }
 
 const ordersCollection = collection(db, 'orders')
@@ -67,6 +84,7 @@ export async function createOrder(data: CreateOrderData): Promise<string> {
     total: data.total,
     status: 'pending',
     createdAt: serverTimestamp(),
+    shippingInfo: data.shippingInfo || null,
   })
 
   return docRef.id
@@ -178,5 +196,6 @@ export async function getOrderById(orderId: string): Promise<Order | null> {
     total: data.total,
     status: data.status,
     createdAt: data.createdAt?.toDate() || new Date(),
+    shippingInfo: data.shippingInfo || undefined,
   } as Order
 }

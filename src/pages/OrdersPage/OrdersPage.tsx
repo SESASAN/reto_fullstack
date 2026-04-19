@@ -267,9 +267,12 @@ export function OrdersPage() {
                   </div>
 
                   <div className="flex flex-wrap gap-3">
-                    <button className="bg-surface-container-high text-on-surface hover:bg-surface-bright transition-colors px-6 py-2.5 rounded-xl font-bold text-sm">
+                    <Link
+                      to={`/orders/${order.id}`}
+                      className="bg-surface-container-high text-on-surface hover:bg-surface-bright transition-colors px-6 py-2.5 rounded-xl font-bold text-sm"
+                    >
                       Ver Detalles
-                    </button>
+                    </Link>
                     {order.status === 'delivered' ? (
                       <button className="bg-gradient-to-br from-primary to-primary-container text-on-primary hover:brightness-110 transition-all px-6 py-2.5 rounded-xl font-bold text-sm flex items-center gap-2">
                         <span className="material-symbols-outlined text-sm">refresh</span>

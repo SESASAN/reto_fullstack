@@ -9,6 +9,7 @@ import { FeaturedPage } from '@/pages/FeaturedPage'
 import { HomePage } from '@/pages/HomePage'
 import { LoginPage } from '@/pages/LoginPage'
 import { NotFoundPage } from '@/pages/NotFoundPage'
+import { OrderDetailPage } from '@/pages/OrderDetailPage'
 import { OrdersPage } from '@/pages/OrdersPage'
 import { ProductDetailPage } from '@/pages/ProductDetailPage'
 import { RegisterPage } from '@/pages/RegisterPage'
@@ -69,6 +70,14 @@ export const router = createBrowserRouter([
         element: (
           <ProtectedRoute>
             <OrdersPage />
+          </ProtectedRoute>
+        ),
+      },
+      {
+        path: '/orders/:orderId',
+        element: (
+          <ProtectedRoute>
+            <OrderDetailPage />
           </ProtectedRoute>
         ),
       },

@@ -15,8 +15,8 @@ export function CartPage() {
   const subtotal = items.reduce((acc, i) => acc + i.product.price * i.quantity, 0)
   const totalItems = items.reduce((acc, i) => acc + i.quantity, 0)
   const isEmpty = items.length === 0
-  const shipping = 45.0
-  const tax = subtotal * 0.05
+  const shipping = 25.0
+  const tax = subtotal * 0.08
   const total = subtotal + shipping + tax
 
   if (isEmpty) {
