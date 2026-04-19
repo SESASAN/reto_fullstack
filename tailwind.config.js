@@ -59,7 +59,7 @@ export default {
       },
       backgroundImage: {
         'obsidian-hero':
-          'linear-gradient(135deg, rgba(199, 191, 255, 0.05) 0%, rgba(142, 127, 255, 0.02) 100%)',
+          'radial-gradient(circle at 30% 50%, rgba(142, 127, 255, 0.15) 0%, rgba(199, 191, 255, 0.08) 50%, transparent 100%)',
         'obsidian-primary': 'linear-gradient(135deg, #c7bfff 0%, #8e7fff 100%)',
       },
     },

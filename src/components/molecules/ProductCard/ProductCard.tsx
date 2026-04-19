@@ -19,14 +19,14 @@ export function ProductCard({ product, onAddToCart, viewMode = 'grid' }: Product
 
   if (isGrid) {
     return (
-      <div className="group relative rounded-2xl border border-outline-variant/10 bg-surface-container p-5 transition-all duration-300 hover:-translate-y-2 hover:border-primary/20 hover:shadow-[0_20px_40px_rgba(0,0,0,0.35)]">
+      <div className="group relative flex flex-col rounded-2xl border border-outline-variant/10 bg-surface-container p-5 transition-all duration-300 hover:-translate-y-2 hover:border-primary/20 hover:shadow-[0_20px_40px_rgba(0,0,0,0.35)]">
         {product.rating?.count && product.rating.count > 200 ? (
           <div className="absolute right-4 top-4 z-10">
             <Badge variant="primary">{PRODUCT_NEW_LABEL}</Badge>
           </div>
         ) : null}
 
-        <Link to={`/products/${productSlug}`} className="block">
+        <Link to={`/products/${productSlug}`} className="flex flex-col flex-grow">
           <div className="aspect-square overflow-hidden rounded-xl bg-surface-container-low flex items-center justify-center">
             <img
               src={product.image}
@@ -36,9 +36,9 @@ export function ProductCard({ product, onAddToCart, viewMode = 'grid' }: Product
             />
           </div>
 
-          <div className="mt-5 space-y-3">
-            <div>
-              <p className="text-[10px] font-black tracking-[0.2em] text-primary uppercase">
+          <div className="mt-5 flex flex-col flex-grow gap-3">
+<div className="flex-grow">
+               <p className="text-[10px] font-black tracking-[0.2em] text-primary uppercase">
                 {categoryLabel(product)}
               </p>
               <h3 className="mt-1 line-clamp-2 font-headline text-lg font-bold text-on-surface">

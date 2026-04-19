@@ -1,4 +1,4 @@
-import heroImg from '@/assets/hero.png'
+import heroImg from '@/assets/icon.svg'
 import { Button, Container } from '@/components/atoms'
 
 import {
@@ -14,6 +14,9 @@ import type { HeroSectionProps } from './HeroSection.types'
 export function HeroSection({ onPrimaryClick, onSecondaryClick }: HeroSectionProps) {
   return (
     <section className="relative overflow-hidden">
+      {/* Background fuera del Container para que cubra todo el ancho */}
+      <div className="pointer-events-none absolute inset-0 -z-10 bg-obsidian-hero" />
+      
       <Container className="relative flex min-h-[520px] items-center py-16 md:min-h-[720px]">
         <div className="relative z-10 max-w-2xl">
           <span className="inline-flex items-center rounded-full border border-outline-variant/20 bg-surface-container-highest px-3 py-1 text-[10px] font-black tracking-[0.2em] text-primary">
@@ -49,8 +52,6 @@ export function HeroSection({ onPrimaryClick, onSecondaryClick }: HeroSectionPro
           />
           <div className="absolute inset-0 bg-gradient-to-l from-transparent via-background/20 to-background" />
         </div>
-
-        <div className="pointer-events-none absolute inset-0 bg-obsidian-hero" />
       </Container>
     </section>
   )
