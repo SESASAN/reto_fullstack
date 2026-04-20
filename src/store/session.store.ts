@@ -9,6 +9,8 @@ import {
   GithubAuthProvider,
   signOut as firebaseSignOut,
   updateProfile,
+  reauthenticateWithCredential,
+  EmailAuthProvider,
   type User as FirebaseUser,
 } from 'firebase/auth'
 
@@ -40,6 +42,7 @@ export type SessionState = {
   loginWithGithub: () => Promise<void>
   logout: () => Promise<void>
   clearError: () => void
+  changePassword: (currentPassword: string, newPassword: string) => Promise<void>
 }
 
 const mapFirebaseUser = (user: FirebaseUser): UserData => ({
@@ -137,6 +140,33 @@ export const useSessionStore = create<SessionState>()(
           const message =
             err instanceof Error ? err.message : 'Error al cerrar sesión'
           set({ error: message, isLoading: false })
+          throw err
+        }
+      },
+
+      changePassword: async (currentPassword: string, newPassword: string) => {
+        set({ error: null })
+        try {
+          const currentUser = auth.currentUser
+          if (!currentUser || !currentUser.email) {
+            throw new Error('No hay usuario autenticado')
+          }
+
+          // Re-authenticate user
+          const credential = EmailAuthProvider.credential(
+            currentUser.email,
+            currentPassword,
+          )
+          await reauthenticateWithCredential(currentUser, credential)
+
+          // Note: Firebase requires import { updatePassword } from 'firebase/auth'
+          // But we need to dynamically import to avoid issues
+          const { updatePassword } = await import('firebase/auth')
+          await updatePassword(currentUser, newPassword)
+        } catch (err) {
+          const message =
+            err instanceof Error ? err.message : 'Error al cambiar contraseña'
+          set({ error: message })
           throw err
         }
       },
