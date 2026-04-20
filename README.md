@@ -1,6 +1,12 @@
+<p align="center">
+  <img src="public/icon.svg" alt="OBSIDIAN" width="200" style="display:block;margin:auto"/>
+</p>
+
 # OBSIDIAN E-commerce
 
 E-commerce SPA desarrollado con React, TypeScript y Firebase. Tema oscuro premium con Tailwind CSS.
+
+---
 
 ## Características
 
@@ -66,3 +72,7 @@ bun run build
 Output: `dist/`
 
 Listo para Cloudflare Pages o Firebase Hosting.
+
+## Licencia
+
+Licensed under the [MIT License](LICENSE).
