@@ -22,6 +22,7 @@ const NAV_LINKS_PRIVATE: readonly TopNavBarLink[] = [
   { to: '/', label: 'Tienda', end: true },
   { to: '/featured', label: 'Destacados' },
   { to: '/orders', label: 'Órdenes' },
+  { to: '/profile', label: 'Perfil' },
   { to: '/cart', label: 'Carrito' },
 ] as const
 

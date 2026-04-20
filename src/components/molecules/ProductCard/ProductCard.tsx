@@ -58,7 +58,7 @@ className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-obs
                 }}
               >
                 <span className="hidden sm:inline">{PRODUCT_ADD_TO_CART_LABEL}</span>
-<span className="sm:hidden text-base font-normal">+</span>
+<span className="sm:hidden text-lg">+</span>
               </button>
             </div>
           </div>
