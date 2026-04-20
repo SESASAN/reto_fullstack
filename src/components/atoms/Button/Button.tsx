@@ -4,16 +4,16 @@ import { BUTTON_SIZES, BUTTON_VARIANTS } from './Button.constants'
 import type { ButtonProps, ButtonSize, ButtonVariant } from './Button.types'
 
 const base =
-  'inline-flex items-center justify-center gap-2 rounded-xl font-semibold transition-all active:scale-[0.98] disabled:cursor-not-allowed disabled:opacity-50'
+  'inline-flex items-center justify-center gap-2 rounded-xl font-semibold transition-all duration-200 ease-out active:scale-[0.98] disabled:cursor-not-allowed disabled:opacity-50 hover:scale-[1.02]'
 
 const variantClass: Record<ButtonVariant, string> = {
   primary:
-    'bg-obsidian-primary text-on-primary shadow-lg shadow-primary/20 hover:shadow-primary/30',
+    'bg-obsidian-primary text-on-primary shadow-lg shadow-primary/20 hover:shadow-xl hover:shadow-primary/30',
   secondary:
-    'border border-outline-variant/30 bg-surface-container-low text-on-surface hover:bg-surface-container-high',
+    'border border-outline-variant/30 bg-surface-container-low text-on-surface hover:bg-surface-container-high hover:border-primary/30',
   ghost: 'text-on-surface/80 hover:text-primary hover:bg-surface-container-low',
   danger:
-    'bg-error-container text-on-error-container hover:brightness-110 shadow-lg shadow-black/30',
+    'bg-error-container text-on-error-container hover:brightness-110 shadow-lg shadow-black/30 hover:scale-[1.02]',
 }
 
 const sizeClass: Record<ButtonSize, string> = {

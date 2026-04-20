@@ -28,10 +28,10 @@ const NAV_LINKS_PRIVATE: readonly TopNavBarLink[] = [
 
 const navLinkClass = ({ isActive }: { isActive: boolean }) =>
   [
-    'text-sm transition-colors',
+    'text-sm transition-all duration-200 ease-out',
     isActive
       ? 'text-primary font-bold'
-      : 'text-on-surface/70 hover:text-primary',
+      : 'text-on-surface/70 hover:text-primary hover:scale-105',
   ].join(' ')
 
 export function TopNavBar() {
@@ -134,7 +134,7 @@ const closeMobileMenu = () => setMobileMenuOpen(false)
                 }
               />
               {totalItems > 0 ? (
-                <span className="absolute -right-1 -top-1 flex h-4 w-4 items-center justify-center rounded-full bg-primary text-[10px] font-black text-on-primary">
+                <span className="absolute -right-1 -top-1 flex h-4 w-4 items-center justify-center rounded-full bg-primary text-[10px] font-black text-on-primary animate-bounce">
                   {totalItems}
                 </span>
               ) : null}
